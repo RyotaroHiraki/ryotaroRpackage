@@ -10,5 +10,6 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 Imports: 
     ggplot2,
-    knitr
+    knitr,
+    ggthemes
 Config/roxygen2/version: 8.1.0
