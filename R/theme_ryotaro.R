@@ -11,7 +11,7 @@
 #' ggplot(mtcars, aes(wt, mpg)) +
 #'   geom_point() +
 #'   theme_ryotaro()
-theme_ryotaro <- function(base_size = 12, base_family = "") {
+theme_ryotaro <- function(base_size = 12, base_family = "Helvetica Neue") {
   ggplot2::theme_minimal(
     base_size = base_size,
     base_family = base_family
@@ -19,6 +19,10 @@ theme_ryotaro <- function(base_size = 12, base_family = "") {
     ggplot2::theme(
       panel.grid.minor = ggplot2::element_blank(),
       panel.grid.major.x = ggplot2::element_blank(),
+      panel.grid.major.y = ggplot2::element_line(
+        colour = scales::alpha("grey", 0.3),
+        linewidth = 0.2
+      ),
       axis.title = ggplot2::element_text(face = "bold"),
       plot.title = ggplot2::element_text(
         face = "bold",
@@ -32,7 +36,7 @@ theme_ryotaro <- function(base_size = 12, base_family = "") {
 }
 
 
-color_palette <- function(palette = "main") {
+color_palette <- function(palette = "personal") {
   switch(
     palette,
     main = c(
@@ -50,10 +54,10 @@ color_palette <- function(palette = "main") {
     personal = c(
       "#D95964",
       "#2b463a",
-      "#dacec1",
-      "#818376",
       "#c79e89",
       "#60381e",
+      "#dacec1",
+      "#818376",
       "#DDDDDD",
       "#777777",
       "#FFFFFF",
