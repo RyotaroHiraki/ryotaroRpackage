@@ -1,0 +1,54 @@
+# Install + load packages
+
+```{r}
+#install.packages(c("devtools", "usethis", "roxygen2"))
+library(devtools)
+library(usethis)
+library(roxygen2)
+```
+# move to package directory
+```{r}
+setwd("~/R_packs/ryotaro/")
+```
+
+# Following commands will be used in R console as you go through the package creating process.
+
+## 1 name your package and set path, this opens up new Positron 
+```{r}
+usethis::create_package("~/R_packs/ryotaro")
+```
+
+## 2 make a funciton file under /R
+```{r}
+usethis::use_r("function_name")
+```
+
+## 3 Write a function under that R file
+
+## 4 Register knitr as a dependent of package　
+### Do this if your function uses other functions inside.
+```{r}
+usethis::use_package("package_name")
+```
+## 5 make a documentation　# 6 then install　
+```{r}
+
+#While editing, do
+devtools::load_all()
+
+#Do this to update
+devtools::document()
+
+
+#after making changes, restart R then
+devtools::install()
+```
+
+### when editing theme_ryotaro, run follwing in terminal to preview your theme
+```{bash}
+Rscript -e 'pkgload::load_all(".", export_all = TRUE, quiet = TRUE); library(ggplot2); 
+p <- ggplot(mtcars, aes(wt, mpg, color = factor(cyl))) + geom_point(size = 3, alpha = 0.9) + 
+  geom_smooth(method = "lm", se = FALSE, linewidth = 0.8) + scale_color_ryotaro(name = "Cylinders") + 
+  labs(title = "theme_ryotaro preview", subtitle = "mtcars: weight vs mpg", x = "Weight", y = "Miles per gallon") + 
+  theme_ryotaro(base_size = 13); ggplot2::ggsave("theme_ryotaro_preview.png", p, width = 7, height = 4.5, dpi = 160)'
+```
