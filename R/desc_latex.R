@@ -22,7 +22,8 @@ desc_latex <- function(data, vars = NULL, digits = 2) {
     SD = sapply(data[vars], function(x) stats::sd(x, na.rm = TRUE)),
     Min = sapply(data[vars], function(x) min(x, na.rm = TRUE)),
     Max = sapply(data[vars], function(x) max(x, na.rm = TRUE)),
-    N = sapply(data[vars], function(x) sum(!is.na(x)))
+    N = sapply(data[vars], function(x) sum(!is.na(x))),
+    row.names = FALSE
   )
 
   desc[, c("Mean", "SD", "Min", "Max")] <- round(
