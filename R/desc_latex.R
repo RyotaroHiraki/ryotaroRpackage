@@ -18,12 +18,11 @@ desc_latex <- function(data, vars = NULL, digits = 2) {
 
   desc <- data.frame(
     Variable = vars,
-    Mean = sapply(data[vars], function(x) mean(x, na.rm = TRUE)),
-    SD = sapply(data[vars], function(x) stats::sd(x, na.rm = TRUE)),
-    Min = sapply(data[vars], function(x) min(x, na.rm = TRUE)),
-    Max = sapply(data[vars], function(x) max(x, na.rm = TRUE)),
-    N = sapply(data[vars], function(x) sum(!is.na(x))),
-    row.names = FALSE
+    Mean = unname(data[vars], function(x) mean(x, na.rm = TRUE)),
+    SD = unname(data[vars], function(x) stats::sd(x, na.rm = TRUE)),
+    Min = unname(data[vars], function(x) min(x, na.rm = TRUE)),
+    Max = unname(data[vars], function(x) max(x, na.rm = TRUE)),
+    N = unname(data[vars], function(x) sum(!is.na(x)))
   )
 
   desc[, c("Mean", "SD", "Min", "Max")] <- round(
@@ -35,6 +34,7 @@ desc_latex <- function(data, vars = NULL, digits = 2) {
     desc,
     format = 'latex',
     booktabs = TRUE,
-    caption = "Descriptive statistics"
+    caption = "Descriptive statistics",
+    row.names = FALSE
   )
 }
