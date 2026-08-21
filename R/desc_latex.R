@@ -10,6 +10,7 @@
 #' @examples
 #' desc_latex(mtcars)
 #' desc_latex(mtcars, vars = c("mpg", "hp", "wt"))
+
 desc_latex <- function(data, vars = NULL, digits = 2) {
   if (is.null(vars)) {
     vars <- names(data)[sapply(data, is.numeric)]
@@ -17,11 +18,11 @@ desc_latex <- function(data, vars = NULL, digits = 2) {
 
   desc <- data.frame(
     Variable = vars,
-    N = sapply(data[vars], function(x) sum(!is.na(x))),
     Mean = sapply(data[vars], function(x) mean(x, na.rm = TRUE)),
     SD = sapply(data[vars], function(x) stats::sd(x, na.rm = TRUE)),
     Min = sapply(data[vars], function(x) min(x, na.rm = TRUE)),
-    Max = sapply(data[vars], function(x) max(x, na.rm = TRUE))
+    Max = sapply(data[vars], function(x) max(x, na.rm = TRUE)),
+    N = sapply(data[vars], function(x) sum(!is.na(x)))
   )
 
   desc[, c("Mean", "SD", "Min", "Max")] <- round(
@@ -31,7 +32,7 @@ desc_latex <- function(data, vars = NULL, digits = 2) {
 
   knitr::kable(
     desc,
-    format = "latex",
+    format = 'latex',
     booktabs = TRUE,
     caption = "Descriptive statistics"
   )
