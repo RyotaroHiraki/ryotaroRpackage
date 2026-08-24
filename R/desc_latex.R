@@ -16,6 +16,12 @@ desc_latex <- function(data, vars = NULL, digits = 2) {
     vars <- names(data)[sapply(data, is.numeric)]
   }
 
+  format_stat <- function(x) {
+    x <- round(x, digits)
+    out <- format(x, trim = TRUE, scientific = FALSE, nsmall = digits)
+    sub("\\.$", "", sub("0+$", "", out))
+  }
+
   desc <- data.frame(
     Variable = vars,
     Mean = sapply(data[vars], function(x) mean(x, na.rm = TRUE)),
@@ -25,14 +31,15 @@ desc_latex <- function(data, vars = NULL, digits = 2) {
     N = sapply(data[vars], function(x) sum(!is.na(x)))
   )
 
-  desc[, c("Mean", "SD", "Min", "Max")] <- round(
+  desc[, c("Mean", "SD", "Min", "Max")] <- lapply(
     desc[, c("Mean", "SD", "Min", "Max")],
-    digits
+    format_stat
   )
 
   knitr::kable(
     desc,
     format = 'latex',
+    align = c("l", "r", "r", "r", "r", "r"),
     booktabs = TRUE,
     caption = "Descriptive statistics",
     row.names = FALSE
