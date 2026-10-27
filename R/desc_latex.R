@@ -19,6 +19,7 @@ desc_latex <- function(data, vars = NULL, digits = 2) {
   format_stat <- function(x) {
     x <- round(x, digits)
     out <- format(x, trim = TRUE, scientific = FALSE, nsmall = digits)
+    if (digits == 0) return(out)
     sub("\\.$", "", sub("0+$", "", out))
   }
 

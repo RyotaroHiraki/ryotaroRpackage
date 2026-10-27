@@ -23,7 +23,10 @@ remotes::install_github("RyotaroHiraki/ryotaro")
 ### Descriptive statistics
 
 All three functions accept `data`, `vars = NULL`, and `digits = 2`. By default,
-they summarize all numeric variables with N, Mean, SD, Min, and Max.
+they summarize all numeric variables with columns in the order Variable, Mean,
+SD, Min, Max, and N. Statistics are rounded and trailing fractional zeros are
+removed. In the data frame returned by `desc_table()`, Mean, SD, Min, and Max
+are formatted character columns, while N contains numeric observation counts.
 
 ```r
 library(ryotaro)

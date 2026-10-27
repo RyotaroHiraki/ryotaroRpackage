@@ -14,7 +14,9 @@ desc_table(data, vars = NULL, digits = 2)
 \item{digits}{Number of digits to round numeric statistics.}
 }
 \value{
-A data frame with Variable, N, Mean, SD, Min, and Max columns.
+A data frame with Variable, Mean, SD, Min, Max, and N columns.
+Mean, SD, Min, and Max are formatted character columns with trailing
+fractional zeros removed. N contains numeric observation counts.
 }
 \description{
 Create a descriptive statistics data frame
